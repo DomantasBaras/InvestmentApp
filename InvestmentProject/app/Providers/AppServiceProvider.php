@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (InterestRange::count() === 0) {
+            Artisan::call('db:seed', ['--class' => InterestRangeSeeder::class]);
+        }
     }
 }
