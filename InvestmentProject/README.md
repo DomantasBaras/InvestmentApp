@@ -1,83 +1,111 @@
-# Investment Management Application
+InvestmentApp
 
-## Overview
+InvestmentApp is a web application for managing investments. Built with Laravel on the backend and Vue.js on the frontend, it allows users to create, view, and manage their investments while dynamically calculating interest rates based on predefined ranges.
+Features
+Backend
 
-This application is a web-based platform for managing investments. It allows users to create investments and calculate interest rates based on predefined ranges. The system ensures user authentication and provides a hybrid setup for handling interest rates, leveraging both database and configuration-based defaults.
+    Laravel Framework: A robust and scalable backend for handling API requests and investment logic.
+    Interest Ranges:
+        Managed through a dedicated class for flexibility and scalability.
+        Automatically seeded during application boot using a database seeder.
+    Investments:
+        Validation to prevent invalid investments (e.g., negative values).
+        Secure user authentication to ensure only logged-in users can create or view investments.
+    Payment Schedule: Automatically generates a payment schedule for each investment.
 
----
+Frontend
 
-## Features
+    Vue.js: Dynamic and interactive user interface.
+    Flexible View Options: Users can toggle between table view and card view to visualize investment and cryptocurrency data.
+    Live Search and Sorting: Allows users to search and sort data dynamically.
+    Responsive Design: Optimized for both desktop and mobile devices.
 
-### Core Functionality
+Installation and Setup
+Prerequisites
 
-- **User Authentication:** Secure user login and registration with token-based authentication.
-- **Investment Creation:** Users can create investments with specified amounts.
-- **Interest Calculation:** Automatically applies interest rates based on configured ranges.
+    Backend Requirements:
+        PHP 8.x or higher
+        Composer
+        MySQL or compatible database
+    Frontend Requirements:
+        Node.js 16.x or higher
+        npm or yarn
 
-### Interest Rate Management
+Steps
 
-- **Dynamic Rates:** Rates can be managed dynamically through a database.
+    Clone the repository:
 
-### Error Handling
+git clone https://github.com/DomantasBaras/InvestmentApp.git
+cd InvestmentApp
 
-- Pre-checks ensure investments cannot be created with invalid values (e.g., negative amounts).
-- Provides clear error messages for invalid operations, such as missing interest rates.
+Install backend dependencies:
 
-### Frontend
+composer install
 
-- Built with Vue.js for a responsive and interactive user interface.
-- Axios is used for API communication.
+Set up the .env file:
 
----
+cp .env.example .env
 
-## Setup Instructions
+Configure your database credentials and other environment variables in the .env file.
 
-### Prerequisites
+Run migrations and seeders:
 
-- PHP >= 8.1
-- Laravel >= 11
-- Node.js & npm
-- MySQL or any other database supported by Laravel
+php artisan migrate --seed
 
-### Installation
+Install frontend dependencies:
 
-1. Clone the repository:
+npm install
 
-   ```bash
-   git clone <repository-url>
-   cd <project-folder>
-   ```
+Build frontend assets:
 
-2. Install dependencies:
+npm run dev
 
-   ```bash
-   composer install
-   npm install
-   ```
+Start the development server:
 
-3. Configure environment variables:
+php artisan serve
 
-   - Copy `.env.example` to `.env`
-     ```bash
-     cp .env.example .env
-     ```
-   - Update `.env` with your database, mail, and other configurations.
+Open the application in your browser:
 
-4. Generate application key:
+    http://localhost:8000
 
-   ```bash
-   php artisan key:generate
-   ```
+Usage
+Investment Creation
 
-5. Run migrations and seeders:
+    Users must log in to create investments.
+    Investments are validated to ensure positive values only.
+    Interest is calculated dynamically based on the predefined ranges:
+        $0 – $100: 5%
+        $100 – $1000: 6%
+        $1000 – $5000: 7%
 
-   ```bash
-   php artisan migrate --seed
-   ```
+View Options
 
-6. Start the development server:
+    Toggle between table view and card view for a customizable visualization of data.
+    Use the search bar to find investments or cryptocurrencies quickly.
+    Sort data by rank, name, or financial attributes.
 
-   ```bash
-   php artisan serve
-   npm run dev
-   ```
+Interest Ranges
+
+Interest ranges are managed via a dedicated PHP class, providing centralized control over rate definitions. A seeder is executed during the boot process to ensure these ranges are preconfigured for every environment.
+
+If adjustments are needed, you can update the seeder or class logic to reflect the new rates.
+Contributing
+
+    Fork the repository.
+    Create a new branch:
+
+git checkout -b feature/your-feature
+
+Commit your changes:
+
+git commit -m "Add your feature"
+
+Push to the branch:
+
+    git push origin feature/your-feature
+
+    Open a pull request.
+
+License
+
+This project is licensed under the MIT License. See the LICENSE file for more information.
